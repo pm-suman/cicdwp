@@ -23,6 +23,6 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" >keyfile
         chmod 600 keyfile
-        rsync -r -e "ssh -i keyfile" /home/pm-suman/cicdforwp/wordpress/wp-content/themes/astra-child $LIVE_USER@$HOST:/home/ubuntu/deployment
+        rsync -r -e "ssh -i keyfile -o StrictHostKeyChecking=no" /home/pm-suman/cicdforwp/wordpress/wp-content/themes/astra-child $LIVE_USER@$HOST:/home/ubuntu/deployment
         ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST && cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/themes/
         ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST && cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/plugins/
