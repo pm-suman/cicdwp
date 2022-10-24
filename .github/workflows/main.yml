@@ -1,0 +1,28 @@
+name: Stage
+on:
+  push:
+    branches: ["workflows"]
+
+jobs:
+  ssh-into:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    
+    - name: Copying files to the destination
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        LIVE_USER: ${{ secrets.LIVE_USER }}
+        HOST: ${{ secrets.HOST }}
+        PORT: ${{ secrets.PORT }}
+        DEST: ${{ secrets.DEST }}
+      run: |
+        echo -e "${SSH_KEY}" > keyfile
+        chmod 600 keyfile
+        rsync /home/pm-suman/cicdforwp/wordpress/wp-content/themes/astra-child $LIVE_USER@$HOST:/home/ubuntu/deployment
+        ssh -p $PORT $LIVE_USER@$HOST && cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/themes/
+        ssh -p $PORT $LIVE_USER@$HOST && cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/plugins/
