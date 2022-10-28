@@ -16,6 +16,6 @@ jobs:
           ARGS: "-e -c -r --delete"
           SERVER_PORT: 22
           FOLDER: "./"
-          SERVER_IP: 34.239.246.114
+          SERVER_IP: 54.235.43.156
           USERNAME: ubuntu
           SERVER_DESTINATION: /home/ubuntu/
