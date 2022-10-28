@@ -18,4 +18,4 @@ jobs:
           FOLDER: "./wordpress"
           SERVER_IP: 54.235.43.156
           USERNAME: ubuntu
-          SERVER_DESTINATION: /home/ubuntu/
+          SERVER_DESTINATION: /home/ubuntu/wp-ci-cd
