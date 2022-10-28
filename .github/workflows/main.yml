@@ -16,6 +16,6 @@ jobs:
           ARGS: "-e -c -r --delete"
           SERVER_PORT: ${{ secrets.PORT }}
           FOLDER: "/home/pm-suman/cicdforwp/wordpress/wp-content/*"
-          SERVER_IP: ${{ secrets.Host }}
+          SERVER_IP: 34.239.246.114
           USERNAME: ${{ secrets.LIVE_USER }}
           SERVER_DESTINATION: ${{ secrets.DEST }}
