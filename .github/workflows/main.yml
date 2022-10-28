@@ -9,17 +9,13 @@ jobs:
 
     steps:
     
-    - name: Copying files to the destination
-      env:
-        SSH_KEY: ${{ secrets.SSH_KEY }}
-        LIVE_USER: ${{ secrets.LIVE_USER }}
-        HOST: ${{ secrets.HOST }}
-        PORT: ${{ secrets.PORT }}
-        DEST: ${{ secrets.DEST }}
-      run: |
-        echo -e "${SSH_KEY}" >keyfile
-        chmod 600 keyfile
-        pwd
-        rsync -r -e "ssh -i keyfile -o StrictHostKeyChecking=no" /home/pm-suman/cicdforwp/wordpress/wp-content/themes/astra-child/* $LIVE_USER@$HOST:/home/ubuntu/deployment
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/themes/"
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress/wp-content/plugins/"
+      - name: deploy to server
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.PORT }}
+          FOLDER: "/home/pm-suman/cicdforwp/wordpress/wp-content/*"
+          SERVER_IP: ${{ secrets.Host }}
+          USERNAME: ${{ secrets.LIVE_USER }}
+          SERVER_DESTINATION: ${{ secrets.DEST }}
