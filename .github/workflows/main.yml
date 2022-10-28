@@ -16,6 +16,6 @@ jobs:
           ARGS: "-e -c -r"
           SERVER_PORT: 22
           FOLDER: "./wordpress"
-          SERVER_IP: 54.235.43.156
+          SERVER_IP: 52.205.227.18
           USERNAME: ubuntu
           SERVER_DESTINATION: /home/ubuntu/wp-ci-cd
