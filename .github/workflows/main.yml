@@ -21,6 +21,5 @@ jobs:
           chmod 600 keyfile
           pwd
           ls
-#          rsync -r -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/astra-child/* $LIVE_USER@$HOST:/home/ubuntu/deployment
           ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
           ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
