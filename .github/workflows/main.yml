@@ -2,6 +2,7 @@ name: Stage
 on:
   push:
     branches: ["workflows"]
+  workflow_dispatch:
 
 jobs:
   ssh-into:
@@ -24,8 +25,8 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/astra-child/* ubuntu@52.205.227.18:/home/ubuntu/deployment
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/deployment/ /home/ubuntu/deployment-staging"
+        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/* ubuntu@52.205.227.18:/home/ubuntu/wp/disk/deployment
+#        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/deployment/ /home/ubuntu/deployment-staging"
 
 
 
