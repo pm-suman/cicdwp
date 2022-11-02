@@ -24,7 +24,7 @@ jobs:
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
         rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/astra-child/* ubuntu@52.205.227.18:/home/ubuntu/deployment
-        
+        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/deployment/ /home/ubuntu/deployment-staging"
 
 
 
