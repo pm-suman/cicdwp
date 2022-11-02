@@ -23,5 +23,5 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
+        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
+        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 " cp -R /home/ubuntu/deployment/* /var/www/wordpress"
