@@ -13,7 +13,7 @@ jobs:
       with:
         fetch-depth: 1
     
-      name: Copying files to the destination
+    - name: Copying files to the destination
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
         LIVE_USER: ubuntu
