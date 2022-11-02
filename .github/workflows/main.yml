@@ -23,7 +23,7 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        ssh -o StrictHostKeyChecking=no -p $PORT -i keyfile $LIVE_USER@$HOST "cd $DEST && ls"
+        rsync -r --timeout=100 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/astra-child/* ubuntu@52.205.227.18:/home/ubuntu/deployment
         
 
 
