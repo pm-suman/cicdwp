@@ -19,12 +19,13 @@ jobs:
         LIVE_USER: ubuntu
         HOST: 52.205.227.18
         PORT: 22
+        command_timeout: 100
         DEST: /home/ubuntu/deployment
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
         rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/astra-child/* ubuntu@52.205.227.18:/home/ubuntu/deployment
-        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/deployment/ /home/ubuntu/deployment-staging"
+        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/deployment/ /home/ubuntu/deployment-staging"
 
 
 
