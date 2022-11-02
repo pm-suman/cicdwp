@@ -23,5 +23,4 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-#        ssh -o StrictHostKeyChecking=no -p $PORT -i keyfile $LIVE_USER@$HOST "cd $DEST && touch testfile1.txt"
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST "cd $DEST && cp -r testfile1.txt /var/www/wordpress"
+        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile $LIVE_USER@$HOST "cd $DEST && cp testfile1.txt /var/www/wordpress/testfile1.txt"
