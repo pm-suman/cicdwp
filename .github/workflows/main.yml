@@ -29,7 +29,7 @@ jobs:
         rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/* ubuntu@52.205.227.18:/home/ubuntu/wp/disk/deployment
         echo "rsync done"
         echo "cp via ssh"
-        ssh -o StrictHostKeyChecking=no -P $PORT -i keyfile ubuntu@52.205.227.18 "cp -R home/ubuntu/wp/disk/deployment/themes/* /home/ubuntu/wp/disk/wordpress_staging/wp-content/themes/"
+        ssh -o StrictHostKeyChecking=no -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/wp/disk/deployment/themes/* /home/ubuntu/wp/disk/wordpress_staging/wp-content/themes/"
 
 
 
