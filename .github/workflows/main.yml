@@ -23,4 +23,4 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        ssh -p $PORT $LIVE_USER@$HOST "cd /home/pmuser/delete-files-test && rm -rf testfile1.txt "
+        ssh -p $PORT -i keyfile $LIVE_USER@$HOST "cd /home/pmuser/delete-files-test && rm -rf testfile1.txt "
