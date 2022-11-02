@@ -23,4 +23,4 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        scp -o StrictHostKeyChecking=no -P $PORT -i keyfile testfile1.txt $LIVE_USER@$HOST:$DEST
+        ssh -p $PORT $USERNAME@$HOST "cd /home/pmuser/delete-files-test && rm -rf testfile1.txt "
