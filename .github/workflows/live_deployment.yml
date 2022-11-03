@@ -26,8 +26,8 @@ jobs:
         chmod 600 ~/.ssh/id_rsa.pub
         chmod 600 ~/.ssh/id_rsa
         echo "rsync themes"
-        rsync -ru --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/themes/
+        rsync -ru --timeout=300 -e "ssh -o StrictHostKeyChecking=no" wordpress/wp-content/themes/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/themes/
         echo "done"
         echo "rsync plugins"
-        rsync -ru --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/plugins/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/plugins/
+        rsync -ru --timeout=300 -e "ssh -o StrictHostKeyChecking=no" wordpress/wp-content/plugins/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/plugins/
         echo "done"
