@@ -25,11 +25,14 @@ jobs:
       run: |
         echo -e "${SSH_KEY}" > keyfile
         chmod 600 keyfile
-        echo "rsync"
-        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/* ubuntu@52.205.227.18:/home/ubuntu/wp/disk/deployment
-        echo "rsync done"
-        echo "cp via ssh"
-        ssh -o StrictHostKeyChecking=no -i keyfile ubuntu@52.205.227.18 "cp -R /home/ubuntu/wp/disk/deployment/themes/* /home/ubuntu/wp/disk/wordpress_staging/wp-content/themes/"
+        echo "rsync live"
+        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/themes/
+        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/plugins/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/plugins/
+        echo "rsync live done"
+        echo "rsync stage"
+        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress_staging/wp-content/themes/
+        rsync -r --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/plugins/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress_staging/wp-content/plugins/
+        echo "rsync stage done"
 
 
 
