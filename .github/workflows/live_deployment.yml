@@ -1,0 +1,33 @@
+name: Live Deployment
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+  ssh-into:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    
+    - name: Copying files to the destination
+      env:
+        SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        LIVE_USER: ${{ secrets.USER }}
+        HOST: ${{ secrets.HOST }}
+      run: |
+        echo -e "${SSH_PUBLIC_KEY}" > ~/.ssh/id_rsa.pub
+        echo -e "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa.pub
+        chmod 600 ~/.ssh/id_rsa
+        echo "rsync themes"
+        rsync -ru --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/themes/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/themes/
+        echo "done"
+        echo "rsync plugins"
+        rsync -ru --timeout=300 -e "ssh -i keyfile -o StrictHostKeyChecking=no" wordpress/wp-content/plugins/ ubuntu@52.205.227.18:/home/ubuntu/wp/disk/wordpress/wp-content/plugins/
+        echo "done"
